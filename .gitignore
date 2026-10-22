@@ -1,3 +1,16 @@
-test_env
-test_venv
+# Переменные окружения и секреты
 .env
+.env.*
+!.env.example
+
+# Виртуальные окружения Python
+.venv/
+
+# Кэш Python
+__pycache__/
+
+# Инструменты тестирования
+.pytest_cache/
+
+# IDE и редакторы
+.idea/
