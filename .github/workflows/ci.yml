@@ -22,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
           cache: pip
           cache-dependency-path: |
             requirements.txt
@@ -50,7 +50,7 @@ jobs:
         with:
           name: fastapi-service
           path: |
-            app_final.py
+            app.py
             requirements.txt
             README.md
           retention-days: 7
