@@ -14,3 +14,8 @@ __pycache__/
 
 # IDE и редакторы
 .idea/
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
