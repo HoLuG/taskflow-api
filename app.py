@@ -5,7 +5,8 @@ from datetime import datetime, timezone
 from typing import Literal
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel, Field
+from typing import Annotated
+from pydantic import BaseModel, Field, StringConstraints
 import database
 
 load_dotenv()
@@ -25,18 +26,24 @@ Status = Literal["todo", "in_progress", "done"]
 SortField = Literal["id", "title", "priority", "status", "due_date", "created_at"]
 SortOrder = Literal["asc", "desc"]
 
+TaskTitle = Annotated[
+    str,
+    StringConstraints(
+        strip_whitespace=True,
+        min_length=1,
+        max_length=100,
+    ),
+]
 
 class TaskCreate(BaseModel):
-    title: str = Field(min_length=1, max_length=100, strip_whitespace=True)
+    title: TaskTitle
     description: str = Field(default="", max_length=500)
     priority: Priority | None = None
     due_date: datetime | None = None
 
 
 class TaskUpdate(BaseModel):
-    title: str | None = Field(
-        default=None, min_length=1, max_length=100, strip_whitespace=True
-    )
+    title: TaskTitle | None = None
     description: str | None = Field(default=None, max_length=500)
     priority: Priority | None = None
     status: Status | None = None

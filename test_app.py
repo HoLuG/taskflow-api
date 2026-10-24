@@ -186,6 +186,12 @@ def test_pagination_rejects_invalid_limit():
     assert response.status_code == 422
 
 
+def test_create_task_rejects_whitespace_title():
+    response = client.post("/tasks", json={"title": "   "})
+
+    assert response.status_code == 422
+
+
 def test_delete_task():
     client.post("/tasks", json={"title": "Temporary task"})
 
